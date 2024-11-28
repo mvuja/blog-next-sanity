@@ -8,7 +8,9 @@ export default async function Home() {
 	return (
 		<>
 			<h1>Posts</h1>
-			{posts?.length > 0 ? posts.map((post: BlogCardType, index: number) => <BlogCard key={post?._id} post={post} />) : <p>No posts</p>}
+			<div className='grid grid-cols-3'>
+				{posts?.length > 0 ? posts.map((post: BlogCardType) => <BlogCard key={post?._id} post={post} />) : <p>No posts</p>}
+			</div>
 		</>
 	)
 }
