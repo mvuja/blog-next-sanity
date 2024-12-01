@@ -18,11 +18,12 @@ const BlogCard = ({ post }: { post: BlogCardType }) => {
 					</Link>
 				</CardTitle>
 				<CardDescription>
-					{categories.map((cat) => (
-						<Badge variant='outline' key='cat'>
-							{cat.title}
-						</Badge>
-					))}
+					{categories &&
+						categories.map((cat) => (
+							<Badge variant='outline' key={cat.title}>
+								{cat.title}
+							</Badge>
+						))}
 				</CardDescription>
 			</CardHeader>
 			<CardContent>

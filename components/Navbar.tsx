@@ -12,7 +12,6 @@ const Navbar = async () => {
 				{session && session?.user ? (
 					<div className='flex items-center gap-4'>
 						<p>{session?.user?.name}</p>
-						{session?.user?.image && <Image className='rounded-full' src={session?.user?.image} width={50} height={50} alt='Profile picture' />}
 						<form
 							action={async () => {
 								'use server'

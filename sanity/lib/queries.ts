@@ -39,3 +39,11 @@ export const BLOG_BY_SLUG_QUERY = defineQuery(`*[_type == "post" && slug.current
     "mainImageUrl": mainImage.asset->url,
     "mainImageAlt": mainImage.alt
 }`)
+
+export const AUTHOR_BY_GOOGLE_ID_QUERY = defineQuery(`*[_type == "author" && id == $id][0]{
+    _id,
+    id,
+    name,
+    email,
+    image
+  }`)
