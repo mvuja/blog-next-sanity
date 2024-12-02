@@ -11,7 +11,7 @@ export default async function Home() {
 	return (
 		<>
 			<h1>Posts</h1>
-			<div className='grid grid-cols-3'>
+			<div className='grid grid-cols-3 gap-5'>
 				{posts?.length > 0 ? posts.map((post: BlogCardType) => <BlogCard key={post?._id} post={post} />) : <p>No posts</p>}
 			</div>
 		</>

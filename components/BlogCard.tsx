@@ -2,36 +2,47 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/utils'
 import Image from 'next/image'
-import PostBody from './PostBody'
 import Link from 'next/link'
+import placeholder from '@/public/placeholder.jpg'
 
 const BlogCard = ({ post }: { post: BlogCardType }) => {
-	const { _id, title, _createdAt, author, body, categories, mainImageUrl, mainImageAlt, slug } = post
+	const { title, _createdAt, author, description, categories, mainImageUrl, mainImageAlt, slug } = post
 
 	return (
 		<Card>
 			<CardHeader>
 				<CardTitle>
-					<Link href={`/blog/${slug.current}`}>
-						<Image className='rounded-xl' src={mainImageUrl} alt={mainImageAlt} width={300} height={200} />
-						<h3 className='text-xl mt-3'>{title}</h3>
-					</Link>
+					<div className='relative aspect-video'>
+						<Link href={`/blog/${slug.current}`}>
+							{mainImageUrl ? (
+								<Image className='rounded-xl' src={mainImageUrl} alt={mainImageAlt} fill />
+							) : (
+								<Image className='rounded-xl' src={placeholder} alt='Image' fill />
+							)}
+						</Link>
+					</div>
+					<h3 className='text-xl mt-3'>
+						<Link href={`/blog/${slug.current}`}>{title}</Link>
+					</h3>
 				</CardTitle>
 				<CardDescription>
+					<p>{formatDate(_createdAt)}</p>
+				</CardDescription>
+			</CardHeader>
+			<CardContent className='pb-4'>
+				<p className='line-clamp-4'>{description}</p>
+			</CardContent>
+			<CardFooter className='block pb-2'>
+				<div className='mb-2'>
 					{categories &&
-						categories.map((cat) => (
-							<Badge variant='outline' key={cat.title}>
+						categories.map((cat: any) => (
+							<Badge variant='outline' key={cat.title} className='mr-1'>
 								{cat.title}
 							</Badge>
 						))}
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<PostBody body={body} />
-			</CardContent>
-			<CardFooter className='flex justify-between'>
-				<p>{formatDate(_createdAt)}</p>
-				<p>By: {author?.name}</p>
+				</div>
+
+				{author && <p className='text-sm text-muted-foreground'>By: {author.name}</p>}
 			</CardFooter>
 		</Card>
 	)

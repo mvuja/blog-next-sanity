@@ -24,6 +24,10 @@ export const postType = defineType({
 			validation: (rule) => rule.required(),
 		}),
 		defineField({
+			name: 'description',
+			type: 'text',
+		}),
+		defineField({
 			name: 'author',
 			type: 'reference',
 			to: { type: 'author' },
@@ -49,7 +53,7 @@ export const postType = defineType({
 			validation: (rule) =>
 				rule.custom((categories) => {
 					if (!categories) return true // No categories, no problem
-					const uniqueIds = new Set(categories.map((cat) => cat._ref))
+					const uniqueIds = new Set(categories.map((cat: any) => cat._ref))
 					if (uniqueIds.size !== categories.length) {
 						return 'Categories must be unique.'
 					}
@@ -60,6 +64,7 @@ export const postType = defineType({
 			name: 'publishedAt',
 			type: 'datetime',
 			initialValue: new Date().toISOString(),
+			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: 'body',

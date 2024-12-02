@@ -4,6 +4,7 @@ export const BLOGS_QUERY = defineQuery(`*[_type == 'post' && defined(slug.curren
     _id,
     title,
     slug,
+    description,
     _createdAt,
     author -> {
       _id,

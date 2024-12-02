@@ -1,13 +1,16 @@
 import { auth, signOut, signIn } from '@/auth'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Navbar = async () => {
 	const session = await auth()
 
 	return (
 		<div className='flex justify-between items-center my-4'>
-			<h1 className='text-3xl'>Navbar</h1>
+			<h1 className='text-3xl'>
+				<Link href={'/'}>Navbar</Link>
+			</h1>
 			<div>
 				{session && session?.user ? (
 					<div className='flex items-center gap-4'>

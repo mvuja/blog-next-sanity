@@ -11,14 +11,14 @@ function urlFor(source: any) {
 
 const portableTextComponents = {
 	types: {
-		image: ({ value }: any) => <img src={urlFor(value.asset).url()} alt={value.alt || 'Image'} className='max-w-full' />,
+		image: ({ value }: any) => <img src={urlFor(value.asset).url()} alt={value.alt || 'Image'} className='max-w-full my-4' />,
 	},
 	block: {
-		h1: ({ children }: any) => <h1 className='text-2xl font-bold'>{children}</h1>,
-		h2: ({ children }: any) => <h2 className='text-xl font-semibold'>{children}</h2>,
-		h3: ({ children }: any) => <h3 className='text-lg font-semibold'>{children}</h3>,
-		h4: ({ children }: any) => <h4 className='text-lg font-semibold'>{children}</h4>,
-		normal: ({ children }: any) => <p className='text-base'>{children}</p>,
+		h1: ({ children }: any) => <h1 className='text-2xl font-bold mb-2'>{children}</h1>,
+		h2: ({ children }: any) => <h2 className='text-xl font-semibold mb-2'>{children}</h2>,
+		h3: ({ children }: any) => <h3 className='text-lg font-semibold mb-2'>{children}</h3>,
+		h4: ({ children }: any) => <h4 className='text-lg font-semibold mb-2'>{children}</h4>,
+		normal: ({ children }: any) => <p className='text-base mb-2'>{children}</p>,
 	},
 	marks: {
 		link: ({ children, value }: any) => (
