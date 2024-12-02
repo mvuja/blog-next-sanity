@@ -21,7 +21,7 @@ export const BLOGS_QUERY = defineQuery(`*[_type == 'post' && defined(slug.curren
     "mainImageAlt": mainImage.alt
 }`)
 
-export const BLOG_BY_SLUG_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
+export const BLOG_BY_SLUG_QUERY = defineQuery(`*[_type == 'post' && slug.current == $slug][0]{
     _id,
     title,
     slug,
@@ -47,4 +47,46 @@ export const AUTHOR_BY_GOOGLE_ID_QUERY = defineQuery(`*[_type == "author" && id 
     name,
     email,
     image
-  }`)
+}`)
+
+export const SORTED_BLOGS_BY_DATE_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] | order(_createdAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    _createdAt,
+    author -> {
+      _id,
+      name,
+      image
+    },
+    body,
+    "categories": categories[]->{
+      _id,
+      title,
+      slug
+    },
+    "mainImageUrl": mainImage.asset->url,
+    "mainImageAlt": mainImage.alt
+}`)
+
+export const SORTED_BLOGS_BY_TITLE_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] | order(title) {
+  _id,
+  title,
+  slug,
+  description,
+  _createdAt,
+  author -> {
+    _id,
+    name,
+    image
+  },
+  body,
+  "categories": categories[]->{
+    _id,
+    title,
+    slug
+  },
+  "mainImageUrl": mainImage.asset->url,
+  "mainImageAlt": mainImage.alt
+}`)

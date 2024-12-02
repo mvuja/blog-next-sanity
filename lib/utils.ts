@@ -12,3 +12,14 @@ export function formatDate(date: string) {
 		year: 'numeric',
 	})
 }
+
+export function capitalize(word: string) {
+	const firstLetter = word?.charAt(0)
+	const remainingLetters = word?.substring(1)
+	const firstLetterCap = firstLetter?.toUpperCase()
+	let capitalizedWord
+	if (firstLetterCap && remainingLetters) {
+		capitalizedWord = firstLetterCap + remainingLetters
+	}
+	return capitalizedWord
+}
