@@ -6,14 +6,15 @@ import { capitalize } from '@/lib/utils'
 
 const DropdownFilter = () => {
 	const router = useRouter()
-
 	const searchParams = useSearchParams()
 
 	const sort = searchParams.get('filter')
 
 	const handleFilterChange = (value: string) => {
-		// Update the URL query parameter
-		router.push(`?filter=${value}`)
+		const params = new URLSearchParams(searchParams.toString())
+		params.set('filter', value)
+
+		router.push(`/blogs?${params.toString()}`)
 	}
 
 	return (

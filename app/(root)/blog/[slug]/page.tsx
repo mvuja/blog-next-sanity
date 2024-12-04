@@ -27,7 +27,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 				{mainImageUrl ? (
 					<Image className='rounded-xl' src={mainImageUrl} alt={mainImageAlt} fill={true} quality={100} loading='eager' />
 				) : (
-					<Image className='rounded-xl' src={placeholder} alt='Image' fill={true} />
+					<Image className='rounded-xl' src={placeholder} alt='Image' fill={true} loading='eager' />
 				)}
 			</div>
 

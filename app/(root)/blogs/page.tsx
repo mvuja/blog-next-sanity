@@ -1,6 +1,7 @@
 import BlogCard from '@/components/BlogCard'
 import DropdownFilter from '@/components/DropdownFilter'
-import { client } from '@/sanity/lib/client'
+import SearchForm from '@/components/SearchForm'
+import { sanityFetch, SanityLive } from '@/sanity/lib/live'
 import { SORTED_BLOGS_BY_DATE_QUERY, SORTED_BLOGS_BY_TITLE_QUERY, BLOGS_QUERY } from '@/sanity/lib/queries'
 
 const availableFilters = {
@@ -11,18 +12,25 @@ const availableFilters = {
 
 type FilterType = keyof typeof availableFilters
 
-const Page = async ({ searchParams }: { searchParams: { filter: string } }) => {
-	const filter = (searchParams.filter as FilterType) || 'default'
+const Page = async ({ searchParams }: { searchParams: Promise<{ filter: string; query?: string }> }) => {
+	const filter = ((await searchParams).filter as FilterType) || 'default'
+	const query = (await searchParams).query
 
-	// Fetch posts based on the validated filter
-	const posts = await client.fetch(availableFilters[filter])
+	const params = { search: query || null }
+
+	// const posts = await client.fetch(availableFilters[filter])
+	// LIVE FETCHING WITH SANITY
+	const { data: posts } = await sanityFetch({ query: availableFilters[filter], params })
 
 	return (
 		<>
 			<DropdownFilter />
+			<SearchForm query={query} />
+			<h1 className='text-3xl font-bold mt-10 mb-3'>{query ? `Search results for: ${query}` : 'All blogs'}</h1>
 			<div className='grid grid-cols-3 gap-5'>
 				{posts?.length > 0 ? posts.map((post: BlogCardType) => <BlogCard key={post?._id} post={post} />) : <p>No posts</p>}
 			</div>
+			<SanityLive />
 		</>
 	)
 }

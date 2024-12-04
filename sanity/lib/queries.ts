@@ -1,6 +1,7 @@
 import { defineQuery } from 'next-sanity'
 
-export const BLOGS_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] {
+export const BLOGS_QUERY =
+	defineQuery(`*[_type == 'post' && defined(slug.current) && !defined($search) || title match $search || categories->title match $search || author->name match $search] {
     _id,
     title,
     slug,
@@ -49,7 +50,8 @@ export const AUTHOR_BY_GOOGLE_ID_QUERY = defineQuery(`*[_type == "author" && id 
     image
 }`)
 
-export const SORTED_BLOGS_BY_DATE_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] | order(_createdAt desc) {
+export const SORTED_BLOGS_BY_DATE_QUERY =
+	defineQuery(`*[_type == 'post' && defined(slug.current)  && !defined($search) || title match $search || categories->title match $search || author->name match $search] | order(_createdAt desc) {
     _id,
     title,
     slug,
@@ -70,7 +72,8 @@ export const SORTED_BLOGS_BY_DATE_QUERY = defineQuery(`*[_type == 'post' && defi
     "mainImageAlt": mainImage.alt
 }`)
 
-export const SORTED_BLOGS_BY_TITLE_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] | order(title) {
+export const SORTED_BLOGS_BY_TITLE_QUERY =
+	defineQuery(`*[_type == 'post' && defined(slug.current)  && !defined($search) || title match $search || categories->title match $search || author->name match $search] | order(title) {
   _id,
   title,
   slug,
