@@ -25,9 +25,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 			</div>
 			<div className='relative aspect-video'>
 				{mainImageUrl ? (
-					<Image className='rounded-xl' src={mainImageUrl} alt={mainImageAlt} fill={true} quality={100} loading='eager' />
+					<Image className='rounded-xl object-cover' src={mainImageUrl} alt={mainImageAlt} fill={true} quality={100} loading='eager' />
 				) : (
-					<Image className='rounded-xl' src={placeholder} alt='Image' fill={true} loading='eager' />
+					<Image className='rounded-xl object-cover' src={placeholder} alt='Image' fill={true} loading='eager' />
 				)}
 			</div>
 

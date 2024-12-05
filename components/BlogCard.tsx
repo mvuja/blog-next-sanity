@@ -15,9 +15,9 @@ const BlogCard = ({ post }: { post: BlogCardType }) => {
 					<div className='relative aspect-video'>
 						<Link href={`/blog/${slug.current}`}>
 							{mainImageUrl ? (
-								<Image className='rounded-xl' src={mainImageUrl} alt={mainImageAlt} fill />
+								<Image className='rounded-xl object-cover' src={mainImageUrl} alt={mainImageAlt} fill />
 							) : (
-								<Image className='rounded-xl' src={placeholder} alt='Image' fill />
+								<Image className='rounded-xl object-cover' src={placeholder} alt='Image' fill />
 							)}
 						</Link>
 					</div>

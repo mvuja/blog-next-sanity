@@ -1,7 +1,28 @@
 import { defineQuery } from 'next-sanity'
 
-export const BLOGS_QUERY =
-	defineQuery(`*[_type == 'post' && defined(slug.current) && !defined($search) || title match $search || categories->title match $search || author->name match $search] {
+export const BLOGS_QUERY = defineQuery(`*[_type == 'post' && defined(slug.current)] | order(_createdAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    _createdAt,
+    author -> {
+      _id,
+      name,
+      image
+    },
+    body,
+    "categories": categories[]->{
+      _id,
+      title,
+      slug
+    },
+    "mainImageUrl": mainImage.asset->url,
+    "mainImageAlt": mainImage.alt
+}`)
+
+export const BLOGS_SEARCH_QUERY =
+	defineQuery(`*[_type == 'post' && defined(slug.current) && !defined($search) || title match $search || categories->title match $search || author->name match $search] | order(_createdAt desc) {
     _id,
     title,
     slug,
