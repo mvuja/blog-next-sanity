@@ -12,6 +12,7 @@ const Navbar = async () => {
 				<Link href={'/'}>Navbar</Link>
 			</h1>
 			<div className='flex items-center gap-4'>
+				<Link href={'/blog/create'}>Create</Link>
 				<Link href={'/blogs'}>Blogs</Link>
 				{session && session?.user ? (
 					<div className='flex items-center gap-4'>
