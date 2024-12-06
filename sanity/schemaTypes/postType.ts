@@ -33,6 +33,10 @@ export const postType = defineType({
 			to: { type: 'author' },
 		}),
 		defineField({
+			name: 'views',
+			type: 'number',
+		}),
+		defineField({
 			name: 'mainImage',
 			type: 'image',
 			options: {

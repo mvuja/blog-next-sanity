@@ -4,9 +4,10 @@ import { formatDate } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import placeholder from '@/public/placeholder.jpg'
+import { EyeIcon } from 'lucide-react'
 
 const BlogCard = ({ post }: { post: BlogCardType }) => {
-	const { title, _createdAt, author, description, categories, mainImageUrl, mainImageAlt, slug } = post
+	const { title, _createdAt, author, views, description, categories, mainImageUrl, mainImageAlt, slug } = post
 
 	return (
 		<Card>
@@ -41,8 +42,13 @@ const BlogCard = ({ post }: { post: BlogCardType }) => {
 							</Badge>
 						))}
 				</div>
-
-				{author && <p className='text-sm text-muted-foreground'>By: {author.name}</p>}
+				<div className='flex justify-between items-center'>
+					{author && <p className='text-sm text-muted-foreground'>By: {author.name}</p>}
+					<div className='flex gap-1.5 items-center'>
+						<EyeIcon className='size-6' />
+						<span className='text-base leading-none'>{views ? views : 0}</span>
+					</div>
+				</div>
 			</CardFooter>
 		</Card>
 	)

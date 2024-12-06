@@ -11,6 +11,7 @@ export const BLOGS_QUERY = defineQuery(`*[_type == 'post' && defined(slug.curren
       name,
       image
     },
+    views,
     body,
     "categories": categories[]->{
       _id,
@@ -33,6 +34,7 @@ export const BLOGS_SEARCH_QUERY =
       name,
       image
     },
+    views,
     body,
     "categories": categories[]->{
       _id,
@@ -53,6 +55,7 @@ export const BLOG_BY_SLUG_QUERY = defineQuery(`*[_type == 'post' && slug.current
       name,
       image
     },
+    views,
     body,
     "categories": categories[]->{
       _id,
@@ -83,6 +86,7 @@ export const SORTED_BLOGS_BY_DATE_QUERY =
       name,
       image
     },
+    views,
     body,
     "categories": categories[]->{
       _id,
@@ -105,6 +109,7 @@ export const SORTED_BLOGS_BY_TITLE_QUERY =
     name,
     image
   },
+  views,
   body,
   "categories": categories[]->{
     _id,
@@ -113,4 +118,8 @@ export const SORTED_BLOGS_BY_TITLE_QUERY =
   },
   "mainImageUrl": mainImage.asset->url,
   "mainImageAlt": mainImage.alt
+}`)
+
+export const BLOGS_VIEWS_QUERY = defineQuery(`*[_type == 'post' && _id == $id][0]{
+  _id, views
 }`)
